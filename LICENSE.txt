@@ -1,0 +1,3 @@
+Under GPLv2 or later.
+
+Note that while linked against QT it becomes GPLv3 or later at the moment due to QT license and https://www.gnu.org/licenses/gpl-faq.html#AllCompatibility. 
