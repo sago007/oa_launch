@@ -1,0 +1,7 @@
+Makefile
+oa_launch
+oa_launch.pro.user
+*.exe
+*.h
+*.cpp
+*.o
