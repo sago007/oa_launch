@@ -27,11 +27,16 @@ https://github.com/sago007/oa_launch
 
 extern OpenArenaLaunch oal;
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    QString labelText("This requires that the following executable exists: ");
+    labelText += QString(oal.openarena_path_bin.c_str());
+    labelText += " or it will just crash";
+    ui->labelPathToBin->setText(labelText);
 }
 
 MainWindow::~MainWindow()
@@ -50,4 +55,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_comboBox_activated(int index)
 {
     oal.setProfile(index);
+    ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
+    ui->modNameEdit->setText(QString(oal.getModName().c_str()));
 }

@@ -33,22 +33,38 @@ void OpenArenaLaunch::setProfile( int value ) {
     this->profileNumber = value;
 }
 
-std::vector<std::string> OpenArenaLaunch::getArguments() {
-    std::vector<std::string> arguments;
+std::string OpenArenaLaunch::getProfileDir() {
+    std::string ret;
     if (profileNumber == 1) {
-        arguments.push_back("+set");
-        arguments.push_back("fs_homepath");
-        arguments.push_back(this->profileBaseDir+"test1");
+        ret = this->profileBaseDir+"test1";
     }
     else if (profileNumber == 2) {
+        ret = this->profileBaseDir+"test2";
+    }
+    return ret;
+}
+
+std::string OpenArenaLaunch::getModName() {
+    std::string ret;
+    if (profileNumber == 3) {
+        ret = "oax";
+    }
+    return ret;
+}
+
+std::vector<std::string> OpenArenaLaunch::getArguments() {
+    std::vector<std::string> arguments;
+    std::string profileHomePath = getProfileDir();
+    if (profileHomePath.length() > 0) {
         arguments.push_back("+set");
         arguments.push_back("fs_homepath");
-        arguments.push_back(this->profileBaseDir+"test2");
+        arguments.push_back(profileHomePath);
     }
-    else if (profileNumber == 3) {
+    std::string modName = getModName();
+    if (modName.length() > 0) {
         arguments.push_back("+set");
         arguments.push_back("fs_game");
-        arguments.push_back("oax");
+        arguments.push_back(modName);
     }
     return arguments;
 }
