@@ -24,6 +24,8 @@ https://github.com/sago007/oa_launch
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "OpenArenaLaunchh.h"
+#include "QDebug"
+#include "QProcess"
 
 extern OpenArenaLaunch oal;
 
@@ -44,9 +46,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+static QProcess* process = nullptr;
+
+static int Launch() {
+    //All these QProcess things should be moved out from OpenArenaLauncher so nothing needs QT
+    if (!process) {
+        process = new QProcess();
+    }
+    if (process->pid()) {
+        return 1;
+    }
+    qDebug() << "Launching profile: " << oal.getProfile() << ", with: " << oal.openarena_path_bin.c_str();
+    QStringList finalArguments;
+    const auto& arguments = oal.getArguments();
+    for (const std::string& value : arguments) {
+        finalArguments.push_back(QString::fromUtf8(value.c_str()));
+    }
+    process->start(oal.openarena_path_bin.c_str(), finalArguments);
+    return 0;
+}
+
 void MainWindow::on_pushButton_clicked()
 {
-    int returnCode = oal.Launch();
+    int returnCode = Launch();
     if (returnCode) {
         statusBar()->showMessage("Already running",5000);
     }

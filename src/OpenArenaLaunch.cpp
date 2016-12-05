@@ -22,7 +22,6 @@ https://github.com/sago007/oa_launch
 */
 
 #include "OpenArenaLaunchh.h"
-#include "QDebug"
 
 OpenArenaLaunch::OpenArenaLaunch()
 {
@@ -69,20 +68,3 @@ std::vector<std::string> OpenArenaLaunch::getArguments() {
     return arguments;
 }
 
-int OpenArenaLaunch::Launch() {
-    //All these QProcess things should be moved out from OpenArenaLauncher so nothing needs QT
-    if (!process) {
-        process = new QProcess();
-    }
-    if (process->pid()) {
-        return 1;
-    }
-    qDebug() << "Launching profile: " << profileNumber << ", with: " << openarena_path_bin.c_str();
-    QStringList finalArguments;
-    const auto& arguments = getArguments();
-    for (const std::string& value : arguments) {
-        finalArguments.push_back(QString::fromUtf8(value.c_str()));
-    }
-    process->start(openarena_path_bin.c_str(), finalArguments);
-    return 0;
-}

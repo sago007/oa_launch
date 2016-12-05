@@ -24,7 +24,9 @@ https://github.com/sago007/oa_launch
 #ifndef OA_LAUNCH_H
 #define OA_LAUNCH_H
 #include <string>
-#include "QProcess"
+#include <vector>
+
+//Note: Try to keep it QT free.
 
 class OpenArenaLaunch
 {
@@ -32,13 +34,13 @@ public:
     OpenArenaLaunch();
     int Launch();
     void setProfile(int profileNumber);
+    int getProfile() {return profileNumber;}
     std::vector<std::string> getArguments();
     std::string getProfileDir();
     std::string getModName();
     std::string profileBaseDir;
     std::string openarena_path_bin = "/bighome/poul/games/openarena-0.8.8/openarena.x86_64";
 private:
-    QProcess* process = nullptr;
     int profileNumber;
 };
 
