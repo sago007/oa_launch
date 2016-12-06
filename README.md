@@ -2,6 +2,7 @@ oa_launch
 
 A very basic launcher for OpenArena.
 
+![A very early screenshot](misc/images/oa_launch_2016_12_05.png)
 
 Compile:
 
