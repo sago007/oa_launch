@@ -23,32 +23,66 @@ https://github.com/sago007/oa_launch
 
 #include "OpenArenaLaunchh.h"
 
+static void InitializeOaProfiles(OaProfileCollection& collection) {
+    OaProfile p1;
+    p1.homepath = "test1";
+    p1.modName = "";
+    p1.profileName = "Test 1";
+    collection.profiles["test1"] = p1;
+    p1.homepath = "test2";
+    p1.modName = "";
+    p1.profileName = "Test 2";
+    collection.profiles["test2"] = p1;
+    p1.homepath = "";
+    p1.modName = "oax";
+    p1.profileName = "OAX";
+    collection.profiles["oax"] = p1;
+}
+
 OpenArenaLaunch::OpenArenaLaunch()
 {
-
+    InitializeOaProfiles(this->profileCollection);
 }
 
 void OpenArenaLaunch::setProfile( int value ) {
     this->profileNumber = value;
+    if (value == 1) {
+        profileId = "test1";
+        activeProfile = profileCollection.profiles["test1"];
+    }
+    else if (value == 2) {
+        profileId = "test2";
+        activeProfile = profileCollection.profiles["test2"];
+    }
+    else if (value == 3) {
+        profileId = "oax";
+        activeProfile = profileCollection.profiles["oax"];
+    }
+    else {
+        profileId = "";
+        activeProfile = OaProfile();
+    }
 }
+
 
 std::string OpenArenaLaunch::getProfileDir() {
     std::string ret;
-    if (profileNumber == 1) {
-        ret = this->profileBaseDir+"test1";
-    }
-    else if (profileNumber == 2) {
-        ret = this->profileBaseDir+"test2";
+    if (activeProfile.homepath.length() > 0) {
+        ret = this->profileBaseDir+activeProfile.homepath;
     }
     return ret;
 }
 
 std::string OpenArenaLaunch::getModName() {
     std::string ret;
-    if (profileNumber == 3) {
-        ret = "oax";
+    if (activeProfile.modName.length() > 0) {
+        ret = activeProfile.modName;
     }
     return ret;
+}
+
+bool OpenArenaLaunch::profileModified() {
+    return activeProfile != profileCollection.profiles[profileId];
 }
 
 std::vector<std::string> OpenArenaLaunch::getArguments() {
@@ -67,4 +101,3 @@ std::vector<std::string> OpenArenaLaunch::getArguments() {
     }
     return arguments;
 }
-

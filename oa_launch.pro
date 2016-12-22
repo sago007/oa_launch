@@ -22,6 +22,7 @@ SOURCES += src/main.cpp\
 
 HEADERS  += src/mainwindow.h \
     src/OpenArenaLaunchh.h \
-    src/platform_things.h
+    src/platform_things.h \
+    src/oa_profiles.h
 
 FORMS    += forms/mainwindow.ui

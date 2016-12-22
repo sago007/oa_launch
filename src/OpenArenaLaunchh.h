@@ -25,6 +25,7 @@ https://github.com/sago007/oa_launch
 #define OA_LAUNCH_H
 #include <string>
 #include <vector>
+#include "oa_profiles.h"
 
 //Note: Try to keep it QT free.
 
@@ -35,13 +36,18 @@ public:
     int Launch();
     void setProfile(int profileNumber);
     int getProfile() {return profileNumber;}
+    const OaProfile& getProfile(int id);
     std::vector<std::string> getArguments();
     std::string getProfileDir();
     std::string getModName();
     std::string profileBaseDir;
     std::string openarena_path_bin = "/bighome/poul/games/openarena-0.8.8/openarena.x86_64";
+    bool profileModified();
 private:
     int profileNumber;
+    std::string profileId;
+    OaProfileCollection profileCollection;
+    OaProfile activeProfile;
 };
 
 #endif // OA_LAUNCH_H
