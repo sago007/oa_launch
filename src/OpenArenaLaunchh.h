@@ -39,11 +39,10 @@ public:
     const OaProfile& getProfile(int id);
     std::vector<std::string> getArguments();
     std::string getProfileDir();
-    std::string getModName();
+	std::string getModName();
     std::string profileBaseDir;
     std::string openarena_path_bin = "/bighome/poul/games/openarena-0.8.8/openarena.x86_64";
     bool profileModified();
-private:
     int profileNumber;
     std::string profileId;
     OaProfileCollection profileCollection;

@@ -10,203 +10,153 @@
     <height>496</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>OpenArena Launcher</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>771</width>
-      <height>441</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QTabWidget" name="tabWidget">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="tab">
-        <property name="locale">
-         <locale language="English" country="UnitedStates"/>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="currentIndex">
+         <number>0</number>
         </property>
-        <attribute name="title">
-         <string>Tab 1</string>
-        </attribute>
-        <widget class="QComboBox" name="comboBox">
-         <property name="geometry">
-          <rect>
-           <x>10</x>
-           <y>10</y>
-           <width>221</width>
-           <height>31</height>
-          </rect>
+        <widget class="QWidget" name="tab">
+         <property name="locale">
+          <locale language="English" country="UnitedStates"/>
          </property>
-         <item>
-          <property name="text">
-           <string>Default</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Test1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Test2</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OAX</string>
-          </property>
-         </item>
-        </widget>
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>220</x>
-           <y>240</y>
-           <width>291</width>
-           <height>41</height>
-          </rect>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>23</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Very very broken!</string>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="profileDirEdit">
-         <property name="geometry">
-          <rect>
-           <x>390</x>
-           <y>20</y>
-           <width>371</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="modNameEdit">
-         <property name="geometry">
-          <rect>
-           <x>390</x>
-           <y>60</y>
-           <width>371</width>
-           <height>27</height>
-          </rect>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QLabel" name="profileLabel">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>30</y>
-           <width>54</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Profile:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_2">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>60</y>
-           <width>54</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Mod:</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_3">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>60</y>
-           <width>171</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Listbox instead of dropbox?</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_4">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>90</y>
-           <width>271</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Of course it should be possible to add more.</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="labelPathToBin">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>320</y>
-           <width>731</width>
-           <height>20</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>TextLabel</string>
-         </property>
-        </widget>
-        <widget class="QLabel" name="label_5">
-         <property name="geometry">
-          <rect>
-           <x>400</x>
-           <y>110</y>
-           <width>361</width>
-           <height>17</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>These fields should of course be editable except for &quot;Default&quot;</string>
-         </property>
+         <attribute name="title">
+          <string>Profiles</string>
+         </attribute>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QComboBox" name="comboBox">
+                <item>
+                 <property name="text">
+                  <string>Default</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Test1</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Test2</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>OAX</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <layout class="QGridLayout" name="gridLayout">
+                <item row="1" column="2">
+                 <widget class="QLineEdit" name="profileDirEdit">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="1">
+                 <widget class="QLabel" name="label_2">
+                  <property name="text">
+                   <string>Mod:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QLineEdit" name="modNameEdit">
+                  <property name="readOnly">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item row="0" column="2">
+                 <widget class="QLineEdit" name="profileNameEdit"/>
+                </item>
+                <item row="0" column="1">
+                 <widget class="QLabel" name="profileLabel">
+                  <property name="text">
+                   <string>Profile:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>Dir:</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QLabel" name="labelPathToBin">
+              <property name="text">
+               <string>TextLabel</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
        </widget>
-      </widget>
-     </item>
-     <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="text">
-        <string>Launch</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Launch</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -214,7 +164,7 @@
      <x>0</x>
      <y>0</y>
      <width>770</width>
-     <height>27</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHelp">

@@ -79,4 +79,5 @@ void MainWindow::on_comboBox_activated(int index)
     oal.setProfile(index);
     ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
     ui->modNameEdit->setText(QString(oal.getModName().c_str()));
+	ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
 }
