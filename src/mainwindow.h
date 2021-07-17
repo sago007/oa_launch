@@ -25,6 +25,7 @@ https://github.com/sago007/oa_launch
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QListWidgetItem>
 
 namespace Ui {
 class MainWindow;
@@ -42,6 +43,8 @@ private slots:
     void on_pushButton_clicked();
 
     void on_comboBox_activated(int index);
+
+    void on_profilesListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
 private:
     Ui::MainWindow *ui;

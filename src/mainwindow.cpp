@@ -27,6 +27,7 @@ https://github.com/sago007/oa_launch
 #include "QDebug"
 #include "QProcess"
 #include <QPixmap>
+#include "OpenArenaLaunchh.h"
 
 extern OpenArenaLaunch oal;
 
@@ -40,8 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     labelText += QString(oal.openarena_path_bin.c_str());
     labelText += " or it will just crash";
     ui->labelPathToBin->setText(labelText);
-	//QPixmap pix("misc/images/openarena_launcher_front.jpg");
-	//ui->labelLogo->setPixmap(pix);
+    for (const OaProfile& p : oal.config.profiles) {
+        ui->profilesListWidget->addItem(QString(p.profileName.c_str()));
+    }
 }
 
 MainWindow::~MainWindow()
@@ -83,4 +85,13 @@ void MainWindow::on_comboBox_activated(int index)
     ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
     ui->modNameEdit->setText(QString(oal.getModName().c_str()));
 	ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
+}
+
+void MainWindow::on_profilesListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+{
+    std::size_t index = ui->profilesListWidget->currentRow();
+    oal.setProfile(index);
+    ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
+    ui->modNameEdit->setText(QString(oal.getModName().c_str()));
+    ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
 }
