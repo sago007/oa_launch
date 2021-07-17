@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>misc/images/openarena_launcher_front.jpg</file>
+    </qresource>
+</RCC>

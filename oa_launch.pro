@@ -26,3 +26,6 @@ HEADERS  += src/mainwindow.h \
     src/oa_profiles.h
 
 FORMS    += forms/mainwindow.ui
+
+RESOURCES += \
+    oa_launch_resources.qrc

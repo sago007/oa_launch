@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
     labelText += QString(oal.openarena_path_bin.c_str());
     labelText += " or it will just crash";
     ui->labelPathToBin->setText(labelText);
-	QPixmap pix("misc/images/openarena_launcher_front.jpg");
-	ui->labelLogo->setPixmap(pix);
+	//QPixmap pix("misc/images/openarena_launcher_front.jpg");
+	//ui->labelLogo->setPixmap(pix);
 }
 
 MainWindow::~MainWindow()
