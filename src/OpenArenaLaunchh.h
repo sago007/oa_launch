@@ -29,13 +29,19 @@ https://github.com/sago007/oa_launch
 
 //Note: Try to keep it QT free.
 
+struct LauncherConfig {
+    std::string exe_path;
+    std::vector<OaProfile> profiles;
+};
+
 class OpenArenaLaunch
 {
 public:
     OpenArenaLaunch();
     int Launch();
-    void setProfile(int profileNumber);
+    void setProfile(std::size_t profileNumber);
     int getProfile() {return profileNumber;}
+    LauncherConfig config;
     const OaProfile& getProfile(int id);
     std::vector<std::string> getArguments();
     std::string getProfileDir();
@@ -45,7 +51,6 @@ public:
     bool profileModified();
     int profileNumber;
     std::string profileId;
-    OaProfileCollection profileCollection;
     OaProfile activeProfile;
 };
 

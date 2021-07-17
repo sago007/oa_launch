@@ -24,9 +24,5 @@ struct OaProfile {
     }
 };
 
-struct OaProfileCollection {
-    std::map<std::string,OaProfile> profiles;
-};
-
 #endif // OA_PROFILES
 
