@@ -23,7 +23,7 @@ https://github.com/sago007/oa_launch
 
 #include "mainwindow.h"
 #include <QApplication>
-#include "OpenArenaLaunchh.h"
+#include "OpenArenaLaunch.h"
 #include <QDir>
 #include <QStandardPaths>
 #include "platform_things.h"

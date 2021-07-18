@@ -21,7 +21,7 @@ https://github.com/sago007/oa_launch
 ===========================================================================
 */
 
-#include "OpenArenaLaunchh.h"
+#include "OpenArenaLaunch.h"
 
 static void InitializeOaProfiles(LauncherConfig& config) {
     OaProfile p1;
@@ -97,4 +97,17 @@ std::vector<std::string> OpenArenaLaunch::getArguments() {
         arguments.push_back(modName);
     }
     return arguments;
+}
+
+void OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
+	if (profile.profileName == "Default") {
+		return;  //Add error message
+	}
+	for (OaProfile& p : this->config.profiles) {
+		if (p.profileName == profile.profileName) {
+			p = profile;
+			return;
+		}
+	}
+	config.profiles.push_back(profile);
 }

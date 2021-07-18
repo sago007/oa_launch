@@ -23,14 +23,21 @@ https://github.com/sago007/oa_launch
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "OpenArenaLaunchh.h"
+#include "OpenArenaLaunch.h"
 #include "QDebug"
 #include "QProcess"
 #include <QPixmap>
-#include "OpenArenaLaunchh.h"
+#include "OpenArenaLaunch.h"
 
 extern OpenArenaLaunch oal;
 
+
+void MainWindow::RefreshModList() {
+	ui->profilesListWidget->clear();
+	for (const OaProfile& p : oal.config.profiles) {
+		ui->profilesListWidget->addItem(QString(p.profileName.c_str()));
+	}
+}
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -41,9 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     labelText += QString(oal.openarena_path_bin.c_str());
     labelText += " or it will just crash";
     ui->labelPathToBin->setText(labelText);
-    for (const OaProfile& p : oal.config.profiles) {
-        ui->profilesListWidget->addItem(QString(p.profileName.c_str()));
-    }
+	RefreshModList();
 }
 
 MainWindow::~MainWindow()
@@ -87,11 +92,21 @@ void MainWindow::on_comboBox_activated(int index)
 	ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
 }
 
-void MainWindow::on_profilesListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
+void MainWindow::on_profilesListWidget_currentItemChanged(QListWidgetItem*, QListWidgetItem*)
 {
     std::size_t index = ui->profilesListWidget->currentRow();
     oal.setProfile(index);
-    ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
-    ui->modNameEdit->setText(QString(oal.getModName().c_str()));
-    ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
+	ui->profileDirFull->setText(to_qstring(oal.getProfileDir()));
+	ui->profileDirEdit->setText(to_qstring(oal.activeProfile.homepath));
+	ui->modNameEdit->setText(to_qstring(oal.getModName()));
+	ui->profileNameEdit->setText(to_qstring(oal.activeProfile.profileName));
+}
+
+void MainWindow::on_saveButton_clicked()
+{
+	oal.activeProfile.modName = to_string(ui->modNameEdit->text());
+	oal.activeProfile.homepath = to_string(ui->profileDirEdit->text());
+	oal.activeProfile.profileName = to_string(ui->profileNameEdit->text());
+	oal.SaveProfile(oal.activeProfile);
+	RefreshModList();
 }

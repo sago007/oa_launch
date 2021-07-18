@@ -31,6 +31,14 @@ namespace Ui {
 class MainWindow;
 }
 
+inline std::string to_string(const QString& qs) {
+	return qs.toUtf8().constData();
+}
+
+inline QString to_qstring(const std::string& s) {
+	return QString::fromStdString(s);
+}
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -44,9 +52,13 @@ private slots:
 
     void on_comboBox_activated(int index);
 
-    void on_profilesListWidget_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+	void on_profilesListWidget_currentItemChanged(QListWidgetItem*, QListWidgetItem*);
+
+	void on_saveButton_clicked();
 
 private:
+	void RefreshModList();
+
     Ui::MainWindow *ui;
 };
 

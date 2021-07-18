@@ -21,7 +21,7 @@ SOURCES += src/main.cpp\
     src/OpenArenaLaunch.cpp
 
 HEADERS  += src/mainwindow.h \
-    src/OpenArenaLaunchh.h \
+    src/OpenArenaLaunch.h \
     src/platform_things.h \
     src/oa_profiles.h
 
