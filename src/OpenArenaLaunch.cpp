@@ -99,15 +99,17 @@ std::vector<std::string> OpenArenaLaunch::getArguments() {
     return arguments;
 }
 
-void OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
+size_t OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
 	if (profile.profileName == "Default") {
-		return;  //Add error message
+		return 0;  //Add error message
 	}
-	for (OaProfile& p : this->config.profiles) {
+	for (size_t i = 0; i < config.profiles.size(); ++i) {
+		OaProfile& p = this->config.profiles.at(i);
 		if (p.profileName == profile.profileName) {
 			p = profile;
-			return;
+			return i;
 		}
 	}
 	config.profiles.push_back(profile);
+	return config.profiles.size()-1;
 }

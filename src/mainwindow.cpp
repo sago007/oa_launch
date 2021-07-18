@@ -33,10 +33,12 @@ extern OpenArenaLaunch oal;
 
 
 void MainWindow::RefreshModList() {
+	std::size_t i = ui->profilesListWidget->currentRow();
 	ui->profilesListWidget->clear();
 	for (const OaProfile& p : oal.config.profiles) {
 		ui->profilesListWidget->addItem(QString(p.profileName.c_str()));
 	}
+	ui->profilesListWidget->setCurrentRow(i);
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -107,6 +109,7 @@ void MainWindow::on_saveButton_clicked()
 	oal.activeProfile.modName = to_string(ui->modNameEdit->text());
 	oal.activeProfile.homepath = to_string(ui->profileDirEdit->text());
 	oal.activeProfile.profileName = to_string(ui->profileNameEdit->text());
-	oal.SaveProfile(oal.activeProfile);
+	size_t index = oal.SaveProfile(oal.activeProfile);
 	RefreshModList();
+	ui->profilesListWidget->setCurrentRow(index);
 }
