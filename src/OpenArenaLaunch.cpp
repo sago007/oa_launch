@@ -50,7 +50,7 @@ OpenArenaLaunch::OpenArenaLaunch()
 
 void OpenArenaLaunch::setProfile( std::size_t value ) {
     this->profileNumber = value;
-    if (value > 0 && value < this->config.profiles.size()) {
+    if (value >= 0 && value < this->config.profiles.size()) {
         activeProfile = config.profiles.at(value);
         profileId = activeProfile.profileName;
     }
@@ -101,8 +101,11 @@ std::vector<std::string> OpenArenaLaunch::getArguments() {
 
 size_t OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
 	if (profile.profileName == "Default") {
-		return 0;  //Add error message
+        throw std::runtime_error("Cannot overwrite \"Default\". Please give the profile another name.");
 	}
+    if (profile.profileName == "") {
+        throw std::runtime_error("No name give. Please give the profile a name.");
+    }
 	for (size_t i = 0; i < config.profiles.size(); ++i) {
 		OaProfile& p = this->config.profiles.at(i);
 		if (p.profileName == profile.profileName) {
@@ -120,7 +123,7 @@ size_t OpenArenaLaunch::RemoveProfile(size_t index) {
     }
     const OaProfile& profile = config.profiles.at(index);
     if (profile.profileName == "Default") {
-        return 0;  // Cannot delete "Default"
+        throw std::runtime_error("Cannot remove \"Default\"");
     }
     config.profiles.erase(config.profiles.begin()+index);
     if (index >= config.profiles.size()) {

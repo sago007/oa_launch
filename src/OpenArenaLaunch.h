@@ -52,7 +52,7 @@ public:
     int profileNumber;
     std::string profileId;
     OaProfile activeProfile;
-	size_t SaveProfile(const OaProfile& profile);
+    size_t SaveProfile(const OaProfile& profile);
     size_t RemoveProfile(size_t index);
 };
 

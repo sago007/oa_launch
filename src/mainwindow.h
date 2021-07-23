@@ -50,8 +50,6 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-    void on_comboBox_activated(int index);
-
 	void on_profilesListWidget_currentItemChanged(QListWidgetItem*, QListWidgetItem*);
 
 	void on_saveButton_clicked();

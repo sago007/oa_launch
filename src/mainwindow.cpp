@@ -82,16 +82,8 @@ void MainWindow::on_pushButton_clicked()
 {
     int returnCode = Launch();
     if (returnCode) {
-        statusBar()->showMessage("Already running",5000);
+        ui->statusBar->showMessage("Already running",5000);
     }
-}
-
-void MainWindow::on_comboBox_activated(int index)
-{
-    oal.setProfile(index);
-    ui->profileDirEdit->setText(QString(oal.getProfileDir().c_str()));
-    ui->modNameEdit->setText(QString(oal.getModName().c_str()));
-	ui->profileNameEdit->setText(QString(oal.activeProfile.profileName.c_str()));
 }
 
 void MainWindow::on_profilesListWidget_currentItemChanged(QListWidgetItem*, QListWidgetItem*)
@@ -109,15 +101,25 @@ void MainWindow::on_saveButton_clicked()
 	oal.activeProfile.modName = to_string(ui->modNameEdit->text());
 	oal.activeProfile.homepath = to_string(ui->profileDirEdit->text());
 	oal.activeProfile.profileName = to_string(ui->profileNameEdit->text());
-	size_t index = oal.SaveProfile(oal.activeProfile);
-	RefreshModList();
-	ui->profilesListWidget->setCurrentRow(index);
+    try {
+        size_t index = oal.SaveProfile(oal.activeProfile);
+        RefreshModList();
+        ui->profilesListWidget->setCurrentRow(index);
+    } catch (std::exception& e) {
+        ui->statusBar->showMessage(e.what(),50000);
+    }
 }
 
 void MainWindow::on_deleteButton_clicked()
 {
-    size_t index = oal.SaveProfile(oal.activeProfile);
-    oal.RemoveProfile(index);
+    ui->statusBar->showMessage("", 0);
+    size_t index = ui->profilesListWidget->currentRow(); // oal.SaveProfile(oal.activeProfile);
+    try {
+        oal.RemoveProfile(index);
+    } catch (std::exception& e) {
+        ui->statusBar->showMessage(e.what(),50000);
+    }
+
     RefreshModList();
     ui->profilesListWidget->setCurrentRow(index);
 }
