@@ -113,3 +113,18 @@ size_t OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
 	config.profiles.push_back(profile);
 	return config.profiles.size()-1;
 }
+
+size_t OpenArenaLaunch::RemoveProfile(size_t index) {
+    if (index >= config.profiles.size()) {
+        return index;  //Tried to remove an element not yet in config
+    }
+    const OaProfile& profile = config.profiles.at(index);
+    if (profile.profileName == "Default") {
+        return 0;  // Cannot delete "Default"
+    }
+    config.profiles.erase(config.profiles.begin()+index);
+    if (index >= config.profiles.size()) {
+        index--;
+    }
+    return index;
+}

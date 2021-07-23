@@ -56,6 +56,8 @@ private slots:
 
 	void on_saveButton_clicked();
 
+    void on_deleteButton_clicked();
+
 private:
 	void RefreshModList();
 

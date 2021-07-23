@@ -113,3 +113,11 @@ void MainWindow::on_saveButton_clicked()
 	RefreshModList();
 	ui->profilesListWidget->setCurrentRow(index);
 }
+
+void MainWindow::on_deleteButton_clicked()
+{
+    size_t index = oal.SaveProfile(oal.activeProfile);
+    oal.RemoveProfile(index);
+    RefreshModList();
+    ui->profilesListWidget->setCurrentRow(index);
+}
