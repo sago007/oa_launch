@@ -22,6 +22,8 @@ https://github.com/sago007/oa_launch
 */
 
 #include "OpenArenaLaunch.h"
+#include <stdexcept>
+
 
 static void InitializeOaProfiles(LauncherConfig& config) {
     OaProfile p1;
@@ -50,7 +52,7 @@ OpenArenaLaunch::OpenArenaLaunch()
 
 void OpenArenaLaunch::setProfile( std::size_t value ) {
     this->profileNumber = value;
-    if (value >= 0 && value < this->config.profiles.size()) {
+    if (value < this->config.profiles.size()) {
         activeProfile = config.profiles.at(value);
         profileId = activeProfile.profileName;
     }
