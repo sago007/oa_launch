@@ -75,6 +75,10 @@ static int Launch() {
         finalArguments.push_back(QString::fromUtf8(value.c_str()));
     }
     process->start(oal.openarena_path_bin.c_str(), finalArguments);
+    bool started_success = process->waitForStarted();
+    if (!started_success) {
+        return 1;
+    }
     return 0;
 }
 
@@ -82,7 +86,7 @@ void MainWindow::on_pushButton_clicked()
 {
     int returnCode = Launch();
     if (returnCode) {
-        ui->statusBar->showMessage("Already running",5000);
+        ui->statusBar->showMessage("Failed to start",5000);
     }
 }
 
@@ -122,4 +126,28 @@ void MainWindow::on_deleteButton_clicked()
 
     RefreshModList();
     ui->profilesListWidget->setCurrentRow(index);
+}
+
+void MainWindow::on_pushButtonUp_clicked()
+{
+    try {
+        size_t index = ui->profilesListWidget->currentRow();
+        size_t new_index = oal.ProfileMoveUp(index);
+        RefreshModList();
+        ui->profilesListWidget->setCurrentRow(new_index);
+    } catch (std::exception& e) {
+        ui->statusBar->showMessage(e.what(),50000);
+    }
+}
+
+void MainWindow::on_pushButtonDown_clicked()
+{
+    try {
+        size_t index = ui->profilesListWidget->currentRow();
+        size_t new_index = oal.ProfileMoveDown(index);
+        RefreshModList();
+        ui->profilesListWidget->setCurrentRow(new_index);
+    } catch (std::exception& e) {
+        ui->statusBar->showMessage(e.what(),50000);
+    }
 }

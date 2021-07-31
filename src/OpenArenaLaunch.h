@@ -54,6 +54,8 @@ public:
     OaProfile activeProfile;
     size_t SaveProfile(const OaProfile& profile);
     size_t RemoveProfile(size_t index);
+    size_t ProfileMoveUp(size_t index);
+    size_t ProfileMoveDown(size_t index);
 };
 
 #endif // OA_LAUNCH_H

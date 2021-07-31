@@ -133,3 +133,20 @@ size_t OpenArenaLaunch::RemoveProfile(size_t index) {
     }
     return index;
 }
+
+
+size_t OpenArenaLaunch::ProfileMoveUp(size_t index) {
+    if (index < 2 || index >= config.profiles.size()) {
+        return index;
+    }
+    std::swap(config.profiles.at(index), config.profiles.at(index-1));
+    return index-1;
+}
+
+size_t OpenArenaLaunch::ProfileMoveDown(size_t index) {
+    if (index < 1 || index >= config.profiles.size()-1) {
+        return index;
+    }
+    std::swap(config.profiles.at(index), config.profiles.at(index+1));
+    return index+1;
+}
