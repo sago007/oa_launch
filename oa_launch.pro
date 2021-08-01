@@ -15,6 +15,8 @@ CONFIG += c++11
 TARGET = oa_launch
 TEMPLATE = app
 
+INCLUDEPATH += $$PWD/src/Libs/include
+
 
 SOURCES += src/main.cpp\
         src/mainwindow.cpp \

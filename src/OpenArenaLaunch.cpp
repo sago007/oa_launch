@@ -22,7 +22,9 @@ https://github.com/sago007/oa_launch
 */
 
 #include "OpenArenaLaunch.h"
+#include "Libs/include/cereal/archives/json.hpp"
 #include <stdexcept>
+#include <fstream>
 
 
 static void InitializeOaProfiles(LauncherConfig& config) {
@@ -30,24 +32,16 @@ static void InitializeOaProfiles(LauncherConfig& config) {
     p1.homepath = "";
     p1.modName = "";
     p1.profileName = "Default";
-    config.profiles.push_back(p1);
-    p1.homepath = "test1";
-    p1.modName = "";
-    p1.profileName = "Test 1";
-    config.profiles.push_back(p1);
-    p1.homepath = "test2";
-    p1.modName = "";
-    p1.profileName = "Test 2";
-    config.profiles.push_back(p1);
-    p1.homepath = "";
-    p1.modName = "oax";
-    p1.profileName = "OAX";
-    config.profiles.push_back(p1);
+    if (config.profiles.size() == 0) {
+        config.profiles.push_back(p1);
+    }
+    else {
+        config.profiles.at(0) = p1;
+    }
 }
 
 OpenArenaLaunch::OpenArenaLaunch()
 {
-    InitializeOaProfiles(this->config);
 }
 
 void OpenArenaLaunch::setProfile( std::size_t value ) {
@@ -112,10 +106,12 @@ size_t OpenArenaLaunch::SaveProfile(const OaProfile& profile) {
 		OaProfile& p = this->config.profiles.at(i);
 		if (p.profileName == profile.profileName) {
 			p = profile;
+            SaveToFile();
 			return i;
 		}
 	}
 	config.profiles.push_back(profile);
+    SaveToFile();
 	return config.profiles.size()-1;
 }
 
@@ -131,6 +127,7 @@ size_t OpenArenaLaunch::RemoveProfile(size_t index) {
     if (index >= config.profiles.size()) {
         index--;
     }
+    SaveToFile();
     return index;
 }
 
@@ -140,6 +137,7 @@ size_t OpenArenaLaunch::ProfileMoveUp(size_t index) {
         return index;
     }
     std::swap(config.profiles.at(index), config.profiles.at(index-1));
+    SaveToFile();
     return index-1;
 }
 
@@ -148,5 +146,23 @@ size_t OpenArenaLaunch::ProfileMoveDown(size_t index) {
         return index;
     }
     std::swap(config.profiles.at(index), config.profiles.at(index+1));
+    SaveToFile();
     return index+1;
+}
+
+void OpenArenaLaunch::SaveToFile() {
+    std::ofstream os(profileConfigFile);
+    cereal::JSONOutputArchive archive(os);
+    archive( CEREAL_NVP(config));
+    std::cout << "Written to: " << profileConfigFile << "\n";
+}
+
+
+void OpenArenaLaunch::LoadFromFile() {
+    std::ifstream is(profileConfigFile);
+    if (is) {
+        cereal::JSONInputArchive archive(is);
+        archive( CEREAL_NVP(config));
+    }
+    InitializeOaProfiles(config);
 }

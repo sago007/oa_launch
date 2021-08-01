@@ -102,6 +102,7 @@ void MainWindow::on_profilesListWidget_currentItemChanged(QListWidgetItem*, QLis
 
 void MainWindow::on_saveButton_clicked()
 {
+    ui->statusBar->showMessage("",50000);
 	oal.activeProfile.modName = to_string(ui->modNameEdit->text());
 	oal.activeProfile.homepath = to_string(ui->profileDirEdit->text());
 	oal.activeProfile.profileName = to_string(ui->profileNameEdit->text());

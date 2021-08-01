@@ -35,6 +35,10 @@ int main(int argc, char *argv[])
     oal.openarena_path_bin = getDefaultBinaryPath();
     oal.profileBaseDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toUtf8().constData();
     oal.profileBaseDir += "/openarena_launcher/profiles/";
+    QDir().mkpath(oal.profileBaseDir.c_str());
+    oal.profileConfigFile = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation).toUtf8().constData();
+    oal.profileConfigFile += "/openarena_launcher/config.json";
+    oal.LoadFromFile();
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

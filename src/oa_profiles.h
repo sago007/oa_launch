@@ -2,6 +2,8 @@
 #define OA_PROFILES
 #include <string>
 #include <map>
+#include "cereal/archives/json.hpp"
+#include "cereal/types/string.hpp"
 
 struct OaProfile {
     std::string profileName;
@@ -21,6 +23,11 @@ struct OaProfile {
     }
     bool operator !=(const OaProfile& other) {
         return !(*this == other);
+    }
+
+    template<class Archive>
+    void serialize(Archive & archive) {
+        archive( CEREAL_NVP(profileName), CEREAL_NVP(modName), CEREAL_NVP(homepath));
     }
 };
 

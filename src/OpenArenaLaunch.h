@@ -26,12 +26,19 @@ https://github.com/sago007/oa_launch
 #include <string>
 #include <vector>
 #include "oa_profiles.h"
+#include "cereal/archives/json.hpp"
+#include "cereal/types/vector.hpp"
 
 //Note: Try to keep it QT free.
 
 struct LauncherConfig {
     std::string exe_path;
     std::vector<OaProfile> profiles;
+
+    template<class Archive>
+    void serialize(Archive & archive) {
+        archive( CEREAL_NVP(exe_path), CEREAL_NVP(profiles));
+    }
 };
 
 class OpenArenaLaunch
@@ -47,11 +54,14 @@ public:
     std::string getProfileDir();
 	std::string getModName();
     std::string profileBaseDir;
+    std::string profileConfigFile = "config.json";
     std::string openarena_path_bin = "/bighome/poul/games/openarena-0.8.8/openarena.x86_64";
     bool profileModified();
     int profileNumber;
     std::string profileId;
     OaProfile activeProfile;
+    void SaveToFile();
+    void LoadFromFile();
     size_t SaveProfile(const OaProfile& profile);
     size_t RemoveProfile(size_t index);
     size_t ProfileMoveUp(size_t index);

@@ -1,0 +1,9 @@
+cereal - A C++11 library for serialization
+==========================================
+Included in oa_launch
+
+https://uscilab.github.io/cereal/
+
+See LICENSE for more information
+
+Version 1.3.0
